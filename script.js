@@ -1,6 +1,5 @@
 (() => {
   const WEDDING_DATE = new Date('2026-10-23T18:00:00-06:00');
-  const VENUE = 'Casa De Eventos Vecchia, Miguel Hidalgo y Costilla 648, Centro, 64000 Monterrey, N.L., México';
   const DAY_MS = 86400000;
 
   function pad(n) {
@@ -18,49 +17,6 @@
     document.querySelector('[data-countdown="hours"]').textContent = pad(hours);
     document.querySelector('[data-countdown="minutes"]').textContent = pad(minutes);
     document.querySelector('[data-countdown="seconds"]').textContent = pad(seconds);
-  }
-
-  function formatIcsDate(date) {
-    return date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
-  }
-
-  function escapeIcsText(text) {
-    return text.replace(/[\\,;]/g, (match) => `\\${match}`).replace(/\n/g, '\\n');
-  }
-
-  function buildIcsDataUri(uid, summary, start, end) {
-    const lines = [
-      'BEGIN:VCALENDAR',
-      'VERSION:2.0',
-      'PRODID:-//carolina-and-didier.com//Boda//ES',
-      'BEGIN:VEVENT',
-      `UID:${uid}@carolina-and-didier.com`,
-      `DTSTAMP:${formatIcsDate(new Date())}`,
-      `DTSTART:${formatIcsDate(start)}`,
-      `DTEND:${formatIcsDate(end)}`,
-      `SUMMARY:${escapeIcsText(summary)}`,
-      `LOCATION:${escapeIcsText(VENUE)}`,
-      'END:VEVENT',
-      'END:VCALENDAR',
-    ];
-    return `data:text/calendar;charset=utf-8,${encodeURIComponent(lines.join('\r\n'))}`;
-  }
-
-  function setCalendarLinks() {
-    const ceremonyLink = document.querySelector('[data-calendar="ceremony"]');
-    const receptionLink = document.querySelector('[data-calendar="reception"]');
-    ceremonyLink.href = buildIcsDataUri(
-      'ceremonia-2026',
-      'Ceremonia civil — Laura Carolina & Didier',
-      new Date('2026-10-23T18:00:00-06:00'),
-      new Date('2026-10-23T19:00:00-06:00')
-    );
-    receptionLink.href = buildIcsDataUri(
-      'recepcion-2026',
-      'Recepción — Laura Carolina & Didier',
-      new Date('2026-10-23T19:00:00-06:00'),
-      new Date('2026-10-24T00:00:00-06:00')
-    );
   }
 
   function setupLightbox() {
@@ -117,7 +73,6 @@
     });
   }
 
-  setCalendarLinks();
   updateCountdown();
   setInterval(updateCountdown, 1000);
   setupLightbox();

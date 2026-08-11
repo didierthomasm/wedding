@@ -1,0 +1,12 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//carolina-and-didier.com//Boda//ES
+BEGIN:VEVENT
+UID:ceremonia-2026@carolina-and-didier.com
+DTSTAMP:20260810T000000Z
+DTSTART:20261024T000000Z
+DTEND:20261024T010000Z
+SUMMARY:Ceremonia civil — Laura Carolina & Didier
+LOCATION:Casa De Eventos Vecchia\, Miguel Hidalgo y Costilla 648\, Centro\, 64000 Monterrey\, N.L.\, México
+END:VEVENT
+END:VCALENDAR
