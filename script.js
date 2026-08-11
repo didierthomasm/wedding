@@ -20,29 +20,46 @@
     document.querySelector('[data-countdown="seconds"]').textContent = pad(seconds);
   }
 
-  function googleCalendarUrl(text, startIso, endIso) {
-    const params = new URLSearchParams({
-      action: 'TEMPLATE',
-      text,
-      dates: `${startIso}/${endIso}`,
-      location: VENUE,
-      ctz: 'America/Monterrey',
-    });
-    return `https://calendar.google.com/calendar/render?${params.toString()}`;
+  function formatIcsDate(date) {
+    return date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+  }
+
+  function escapeIcsText(text) {
+    return text.replace(/[\\,;]/g, (match) => `\\${match}`).replace(/\n/g, '\\n');
+  }
+
+  function buildIcsDataUri(uid, summary, start, end) {
+    const lines = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//carolina-and-didier.com//Boda//ES',
+      'BEGIN:VEVENT',
+      `UID:${uid}@carolina-and-didier.com`,
+      `DTSTAMP:${formatIcsDate(new Date())}`,
+      `DTSTART:${formatIcsDate(start)}`,
+      `DTEND:${formatIcsDate(end)}`,
+      `SUMMARY:${escapeIcsText(summary)}`,
+      `LOCATION:${escapeIcsText(VENUE)}`,
+      'END:VEVENT',
+      'END:VCALENDAR',
+    ];
+    return `data:text/calendar;charset=utf-8,${encodeURIComponent(lines.join('\r\n'))}`;
   }
 
   function setCalendarLinks() {
     const ceremonyLink = document.querySelector('[data-calendar="ceremony"]');
     const receptionLink = document.querySelector('[data-calendar="reception"]');
-    ceremonyLink.href = googleCalendarUrl(
+    ceremonyLink.href = buildIcsDataUri(
+      'ceremonia-2026',
       'Ceremonia civil — Laura Carolina & Didier',
-      '20261023T180000',
-      '20261023T190000'
+      new Date('2026-10-23T18:00:00-06:00'),
+      new Date('2026-10-23T19:00:00-06:00')
     );
-    receptionLink.href = googleCalendarUrl(
+    receptionLink.href = buildIcsDataUri(
+      'recepcion-2026',
       'Recepción — Laura Carolina & Didier',
-      '20261023T190000',
-      '20261024T000000'
+      new Date('2026-10-23T19:00:00-06:00'),
+      new Date('2026-10-24T00:00:00-06:00')
     );
   }
 
