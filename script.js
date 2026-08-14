@@ -181,7 +181,15 @@
     const sections = dots
       .map((dot) => document.getElementById(dot.dataset.target))
       .filter(Boolean);
+    const heroSection = document.querySelector('.hero');
     let labelTimeout = null;
+
+    function toggleRailVisibility() {
+      const revealAt = heroSection ? heroSection.offsetTop + heroSection.offsetHeight : 0;
+      rail.classList.toggle('section-rail--visible', window.scrollY > revealAt);
+    }
+    toggleRailVisibility();
+    window.addEventListener('scroll', toggleRailVisibility, { passive: true });
 
     const showLabel = (index) => {
       dots.forEach((dot, i) => {
