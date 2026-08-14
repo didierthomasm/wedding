@@ -176,22 +176,36 @@
     const rail = document.getElementById('sectionRail');
     if (!rail) return;
 
+    const LABEL_VISIBLE_MS = 1800;
     const dots = [...rail.querySelectorAll('.section-rail__dot')];
     const sections = dots
       .map((dot) => document.getElementById(dot.dataset.target))
       .filter(Boolean);
+    let labelTimeout = null;
 
-    dots.forEach((dot, i) => {
-      dot.addEventListener('click', () => {
-        sections[i].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const showLabel = (index) => {
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('section-rail__dot--show-label', i === index);
       });
-    });
+      clearTimeout(labelTimeout);
+      labelTimeout = setTimeout(() => {
+        dots.forEach((dot) => dot.classList.remove('section-rail__dot--show-label'));
+      }, LABEL_VISIBLE_MS);
+    };
 
     const setActive = (index) => {
       dots.forEach((dot, i) => {
         dot.classList.toggle('section-rail__dot--active', i === index);
       });
+      showLabel(index);
     };
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        sections[i].scrollIntoView({ behavior: 'smooth', block: 'start' });
+        showLabel(i);
+      });
+    });
 
     const observer = new IntersectionObserver(
       (entries) => {

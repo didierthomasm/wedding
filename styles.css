@@ -763,6 +763,14 @@ body.no-scroll {
   flex-direction: column;
   gap: 10px;
   align-items: flex-end;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 240ms;
+}
+
+.section-rail--visible {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .section-rail__dot {
@@ -777,8 +785,8 @@ body.no-scroll {
 }
 
 .section-rail__mark {
-  width: 4px;
-  height: 4px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   background: rgba(var(--gold-rgb), 0.4);
   flex: 0 0 auto;
@@ -787,7 +795,7 @@ body.no-scroll {
 
 .section-rail__label {
   font-family: 'Jost', sans-serif;
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--cream-bright);
@@ -800,12 +808,12 @@ body.no-scroll {
 
 .section-rail__dot--active .section-rail__mark {
   background: var(--gold);
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 
-.section-rail__dot--active .section-rail__label {
-  max-width: 100px;
+.section-rail__dot--show-label .section-rail__label {
+  max-width: 120px;
   opacity: 1;
 }
 
