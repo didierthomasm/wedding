@@ -751,6 +751,64 @@ body.no-scroll {
   text-wrap: pretty;
 }
 
+/* Section rail ------------------------------------------------------------- */
+
+.section-rail {
+  position: fixed;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  z-index: 850;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.section-rail__dot {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 5px;
+  border: none;
+  background: transparent;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.section-rail__mark {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(var(--gold-rgb), 0.4);
+  flex: 0 0 auto;
+  transition: background 200ms, width 200ms, height 200ms;
+}
+
+.section-rail__label {
+  font-family: 'Jost', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cream-bright);
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  opacity: 0;
+  transition: max-width 220ms ease, opacity 180ms ease;
+}
+
+.section-rail__dot--active .section-rail__mark {
+  background: var(--gold);
+  width: 6px;
+  height: 6px;
+}
+
+.section-rail__dot--active .section-rail__label {
+  max-width: 100px;
+  opacity: 1;
+}
+
 /* Doubts (dudas) ------------------------------------------------------------- */
 
 .doubts-fab {

@@ -18,7 +18,7 @@
   <div class="hero-wrap">
     <div class="hero-glow" aria-hidden="true"></div>
 
-    <section class="hero">
+    <section class="hero" id="inicio">
       <div class="hero__frame hero__frame--outer" aria-hidden="true"></div>
       <div class="hero__frame hero__frame--inner" aria-hidden="true"></div>
       <div class="hero__corner hero__corner--tl" aria-hidden="true"></div>
@@ -73,7 +73,7 @@
       </div>
     </section>
 
-    <section class="details">
+    <section class="details" id="detalles">
       <header class="section-heading">
         <div class="section-heading__eyebrow">Detalles</div>
         <div class="section-heading__rule" aria-hidden="true"></div>
@@ -121,7 +121,7 @@
       </article>
     </section>
 
-    <section class="airport">
+    <section class="airport" id="como-llegar">
       <header class="section-heading">
         <div class="section-heading__eyebrow">Cómo llegar</div>
         <div class="section-heading__rule" aria-hidden="true"></div>
@@ -147,7 +147,7 @@
       </article>
     </section>
 
-    <section class="dresscode">
+    <section class="dresscode" id="vestimenta">
       <header class="section-heading">
         <div class="section-heading__eyebrow">Código de vestimenta</div>
         <div class="section-heading__rule" aria-hidden="true"></div>
@@ -211,7 +211,7 @@
       </div>
     </section>
 
-    <section class="registry">
+    <section class="registry" id="regalos">
       <div class="section-heading__eyebrow">Mesa de regalos</div>
       <div class="section-heading__rule" aria-hidden="true"></div>
       <p class="registry__text">Tu presencia es el regalo que más esperamos. Si además deseas obsequiarnos algo, aquí lo dejamos por escrito.</p>
@@ -244,6 +244,14 @@
     <button class="btn btn--outline" data-modal-close type="button">Continuar</button>
   </div>
 </div>
+
+<nav class="section-rail" id="sectionRail" aria-label="Navegación de secciones">
+  <button class="section-rail__dot" data-target="inicio" aria-label="Ir a Inicio"><span class="section-rail__mark" aria-hidden="true"></span><span class="section-rail__label">Inicio</span></button>
+  <button class="section-rail__dot" data-target="detalles" aria-label="Ir a Detalles"><span class="section-rail__mark" aria-hidden="true"></span><span class="section-rail__label">Detalles</span></button>
+  <button class="section-rail__dot" data-target="como-llegar" aria-label="Ir a Cómo llegar"><span class="section-rail__mark" aria-hidden="true"></span><span class="section-rail__label">Cómo llegar</span></button>
+  <button class="section-rail__dot" data-target="vestimenta" aria-label="Ir a Vestimenta"><span class="section-rail__mark" aria-hidden="true"></span><span class="section-rail__label">Vestimenta</span></button>
+  <button class="section-rail__dot" data-target="regalos" aria-label="Ir a Regalos"><span class="section-rail__mark" aria-hidden="true"></span><span class="section-rail__label">Regalos</span></button>
+</nav>
 
 <button class="doubts-fab" id="doubtsFab" type="button" aria-label="Enviar una duda">?</button>
 

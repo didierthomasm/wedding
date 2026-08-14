@@ -172,7 +172,42 @@
 
   updateCountdown();
   setInterval(updateCountdown, 1000);
+  function setupSectionRail() {
+    const rail = document.getElementById('sectionRail');
+    if (!rail) return;
+
+    const dots = [...rail.querySelectorAll('.section-rail__dot')];
+    const sections = dots
+      .map((dot) => document.getElementById(dot.dataset.target))
+      .filter(Boolean);
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        sections[i].scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    const setActive = (index) => {
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('section-rail__dot--active', i === index);
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          setActive(sections.indexOf(entry.target));
+        });
+      },
+      { rootMargin: '-45% 0px -45% 0px', threshold: 0 }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+  }
+
   setupLightbox();
   setupWelcomeModal();
   setupDoubtsForm();
+  setupSectionRail();
 })();
